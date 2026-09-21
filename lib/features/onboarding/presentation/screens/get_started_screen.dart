@@ -61,7 +61,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 const SizedBox(height: 40),
                 // Welcome Text
                 Text(
-                  'Welcome to NoTempt',
+                  'Welcome to Quittr',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontFamily: GoogleFonts.poppins().fontFamily,
                         fontWeight: FontWeight.bold,

@@ -1,11 +1,11 @@
 {
-     "name": "NoTempt",
-     "short_name": "NoTempt",
+     "name": "Quittr",
+     "short_name": "Quittr",
      "start_url": ".",
      "display": "standalone",
      "background_color": "#0175C2",
      "theme_color": "#0175C2",
-     "description": "NoTempt is a web application that helps you stay focused by blocking distracting websites and apps.",
+     "description": "Quittr by Adulting.space — your companion to quit addiction, track your recovery streak and build healthier habits.",
      "orientation": "portrait-primary",
      "prefer_related_applications": false,
      "icons": [

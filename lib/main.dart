@@ -63,7 +63,7 @@ class QuittrApp extends StatelessWidget {
           final theme = MaterialTheme(GoogleFonts.poppinsTextTheme());
           return MaterialApp.router(
             routerConfig: AppRouter.router,
-            title: 'NoTempt',
+            title: 'Quittr',
             debugShowCheckedModeBanner: false,
             theme: theme.light(),
             darkTheme: theme.dark(),

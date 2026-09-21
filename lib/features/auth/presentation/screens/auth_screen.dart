@@ -184,7 +184,7 @@ class _AuthScreenContent extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Welcome to NoTempt',
+          'Welcome to Quittr',
           style: GoogleFonts.poppins(
             fontSize: 28,
             fontWeight: FontWeight.bold,

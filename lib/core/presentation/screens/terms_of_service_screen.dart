@@ -31,7 +31,7 @@ class TermsOfServiceScreen extends StatelessWidget {
             _buildSection(
               context,
               '1. Use of the App',
-              'You may use NoTempt only if you are at least 13 years old and agree to comply with these Terms. You are responsible for your use of the App and for any activity that occurs under your account.',
+              'You may use Quittr only if you are at least 13 years old and agree to comply with these Terms. You are responsible for your use of the App and for any activity that occurs under your account.',
             ),
             const SizedBox(height: 16),
             _buildSection(
@@ -79,7 +79,7 @@ class TermsOfServiceScreen extends StatelessWidget {
             _buildSection(
               context,
               '9. Contact',
-              'If you have any questions about these Terms, please contact us at support@notempt.com',
+              'If you have any questions about these Terms, please contact us at support@adulting.space',
             ),
             const SizedBox(height: 24),
           ],

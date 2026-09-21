@@ -1,5 +1,7 @@
 # Quittr
 
+> Quittr by Adulting.space
+
 Quittr is a Flutter-based mobile application designed to help users quit addictions and track their recovery journey. The app provides onboarding, quizzes, motivational content, relapse tracking, breathing exercises, and more, with a clean architecture and modular feature structure.
 
 ---

@@ -49,19 +49,19 @@ class PrivacyPolicyScreen extends StatelessWidget {
             _buildSection(
               context,
               '4. Third-Party Services',
-              'NoTempt does not use third-party advertising or analytics services that collect your personal data.',
+              'Quittr does not use third-party advertising or analytics services that collect your personal data.',
             ),
             const SizedBox(height: 16),
             _buildSection(
               context,
               '5. Data Deletion',
-              'You can request deletion of your account and associated data at any time by contacting us at support@notempt.com.',
+              'You can request deletion of your account and associated data at any time by contacting us at support@adulting.space.',
             ),
             const SizedBox(height: 16),
             _buildSection(
               context,
               '6. Children\'s Privacy',
-              'NoTempt is not intended for users under the age of 13. We do not knowingly collect personal information from children.',
+              'Quittr is not intended for users under the age of 13. We do not knowingly collect personal information from children.',
             ),
             const SizedBox(height: 16),
             _buildSection(
@@ -73,7 +73,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
             _buildSection(
               context,
               '8. Contact Us',
-              'If you have any questions about this Privacy Policy or your data, please contact us at support@notempt.com',
+              'If you have any questions about this Privacy Policy or your data, please contact us at support@adulting.space',
             ),
             const SizedBox(height: 24),
           ],

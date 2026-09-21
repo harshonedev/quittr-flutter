@@ -109,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen>
                         ),
                         const SizedBox(height: 40),
                         Text(
-                          'NoTempt',
+                          'Quittr',
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge
