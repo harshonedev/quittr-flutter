@@ -1,0 +1,15 @@
+{
+    "quotes": [
+      {"id": 1, "text": "The only way to do great work is to love what you do. - Steve Jobs"},
+      {"id": 2, "text": "Success is not the key to happiness. Happiness is the key to success. - Albert Schweitzer"},
+      {"id": 3, "text": "Believe you can and you're halfway there. - Theodore Roosevelt"},
+      {"id": 4, "text": "Your time is limited, so don’t waste it living someone else’s life. - Steve Jobs"},
+      {"id": 5, "text": "The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt"},
+      {"id": 6, "text": "Don’t watch the clock; do what it does. Keep going. - Sam Levenson"},
+      {"id": 7, "text": "It does not matter how slowly you go as long as you do not stop. - Confucius"},
+      {"id": 8, "text": "Difficulties in life are intended to make us better, not bitter. - Dan Reeves"},
+      {"id": 9, "text": "Act as if what you do makes a difference. It does. - William James"},
+      {"id": 10, "text": "The best way to predict the future is to create it. - Peter Drucker"}
+    ]
+  }
+  

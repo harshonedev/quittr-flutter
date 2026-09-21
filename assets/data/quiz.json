@@ -1,0 +1,103 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "question": "When did you first encounter adult content online?",
+            "options": [
+                "Under 12 years old",
+                "Between 13-16 years",
+                "Between 17-24 years", 
+                "25 years or above"
+            ]
+        },
+        {
+            "id": 2,
+            "question": "What is your current frequency of consuming adult content?",
+            "options": [
+                "Multiple times per day",
+                "Daily",
+                "Several times weekly",
+                "Once weekly or less"
+            ]
+        },
+        {
+            "id": 3,
+            "question": "Over time, have you found yourself consuming adult content more frequently?",
+            "options": [
+                "Yes",
+                "No"
+            ]
+        },
+        {
+            "id": 4,
+            "question": "Do you find yourself seeking increasingly intense content over time?",
+            "options": [
+                "Yes",
+                "No"
+            ]
+        },
+        {
+            "id": 5,
+            "question": "When did you have your first intimate experience?",
+            "options": [
+                "Before age 13",
+                "Between 13-17 years",
+                "Age 18 or older",
+                "No experience yet"
+            ]
+        },
+        {
+            "id": 6,
+            "question": "How do you identify?",
+            "options": [
+                "Male",
+                "Female",
+                "Non-binary"
+            ]
+        },
+        {
+            "id": 7,
+            "question": "How often do you require adult content for intimate arousal?",
+            "options": [
+                "Most times",
+                "Sometimes",
+                "Seldom or never"
+            ]
+        },
+        {
+            "id": 8,
+            "question": "Do you seek adult content when dealing with emotional challenges?",
+            "options": [
+                "Often",
+                "Sometimes",
+                "Rarely or never"
+            ]
+        },
+        {
+            "id": 9,
+            "question": "Is viewing adult content your response to stress?",
+            "options": [
+                "Usually",
+                "Sometimes",
+                "Rarely or never"
+            ]
+        },
+        {
+            "id": 10,
+            "question": "Do you access adult content when feeling unstimulated?",
+            "options": [
+                "Often",
+                "Sometimes",
+                "Rarely or never"
+            ]
+        },
+        {
+            "id": 11,
+            "question": "Have you made any financial transactions for adult content?",
+            "options": [
+                "Yes",
+                "No"
+            ]
+        }
+    ]
+}
