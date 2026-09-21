@@ -16,5 +16,4 @@ class Constants {
       "You'll receive a notification in 24 hours to check in and see how you did.";
 
   static const String podcastUrl = "https://www.youtube.com/watch?v=lJlX37bnPnE";
-  static const String planTitle = "Premium Plan";
 }

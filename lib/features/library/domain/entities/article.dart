@@ -7,7 +7,6 @@ class Article {
   final String? imageUrl;
   final Duration readingTime;
   final DateTime? publishedDate;
-  final bool isPremium;
 
   const Article({
     required this.id,
@@ -18,7 +17,6 @@ class Article {
     this.imageUrl,
     this.readingTime = const Duration(minutes: 5),
     this.publishedDate,
-    this.isPremium = false,
   });
 
   /// Returns a shorter version of the content for previews
@@ -59,7 +57,6 @@ class Article {
       publishedDate: json['publishedDate'] != null
           ? DateTime.parse(json['publishedDate'] as String)
           : null,
-      isPremium: json['isPremium'] as bool? ?? false,
     );
   }
 
@@ -73,7 +70,6 @@ class Article {
       'imageUrl': imageUrl,
       'readingTimeMinutes': readingTime.inMinutes,
       'publishedDate': publishedDate?.toIso8601String(),
-      'isPremium': isPremium,
     };
   }
 
@@ -87,7 +83,6 @@ class Article {
     String? imageUrl,
     Duration? readingTime,
     DateTime? publishedDate,
-    bool? isPremium,
   }) {
     return Article(
       id: id ?? this.id,
@@ -98,7 +93,6 @@ class Article {
       imageUrl: imageUrl ?? this.imageUrl,
       readingTime: readingTime ?? this.readingTime,
       publishedDate: publishedDate ?? this.publishedDate,
-      isPremium: isPremium ?? this.isPremium,
     );
   }
 }

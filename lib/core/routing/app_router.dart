@@ -9,21 +9,16 @@ import 'package:quittr/features/journal/domain/entities/journal_entry.dart';
 import 'package:quittr/features/journal/presentation/screens/journal_detail_screen.dart';
 import 'package:quittr/features/onboarding/presentation/screens/get_started_screen.dart';
 import 'package:quittr/features/onboarding/presentation/screens/onboarding_screen.dart';
-import 'package:quittr/features/paywall/presentation/screens/paywall_screen.dart';
-import 'package:quittr/features/paywall/presentation/screens/subscription_management_screen.dart';
 import 'package:quittr/features/reason/data/models/reason_model.dart';
 import 'package:quittr/features/reason/presentation/screens/reason_detail_screen.dart';
 import 'package:quittr/features/settings/presentation/screens/settings_screen.dart';
 import 'package:quittr/core/presentation/screens/splash_screen.dart';
 import 'package:quittr/core/presentation/screens/terms_of_service_screen.dart';
 import 'package:quittr/core/presentation/screens/privacy_policy_screen.dart';
-import 'package:quittr/features/paywall/presentation/screens/susbcricption_status_screen.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quittr/core/injection_container.dart';
 import 'package:quittr/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:quittr/features/paywall/domain/usecases/check_subscription_status.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quittr/features/auth/presentation/screens/email_auth_screen.dart';
 import 'package:quittr/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:quittr/features/breathing_exercise/presentation/screens/breathing_excercise_page.dart';
@@ -55,28 +50,6 @@ class AppRouter {
   static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   static bool isAuthenticated = false;
-  static bool isGoogleTestUser = false;
-  static bool isSubscribed = false;
-
-  // Static method to check if user has active subscription
-  static Future<bool> isUserSubscribed() async {
-    if (!isAuthenticated) return false;
-
-    try {
-      final checkSubscriptionUseCase = sl<CheckSubscriptionStatusUseCase>();
-      final currentUser = FirebaseAuth.instance.currentUser;
-
-      if (currentUser == null) return false;
-
-      final result = await checkSubscriptionUseCase(currentUser.uid);
-      return result.fold(
-        (failure) => false,
-        (subscribedProduct) => subscribedProduct != null,
-      );
-    } catch (e) {
-      return false;
-    }
-  }
 
   static final GoRouter router = GoRouter(
       navigatorKey: _rootNavigatorKey,
@@ -236,15 +209,6 @@ class AppRouter {
               ),
             ]),
 
-        // Paywall Route (Modal)
-        GoRoute(
-          path: '/paywall',
-          parentNavigatorKey: _rootNavigatorKey,
-          builder: (context, state) {
-            return const PaywallScreen();
-          },
-        ),
-
         // Terms of Service Route
         GoRoute(
           path: '/terms',
@@ -256,31 +220,6 @@ class AppRouter {
           path: '/privacy-policy',
           builder: (context, state) => const PrivacyPolicyScreen(),
         ),
-
-        // Route for callaback from polar when paymnent is completed
-        GoRoute(
-            path: '/subscription-status',
-            builder: (context, state) {
-              final checkoutId = state.uri.queryParameters['checkout_id'];
-              print('Checkout ID: $checkoutId');
-              return SusbcricptionStatusScreen();
-            }),
-
-        GoRoute(
-            path: '/subscription-success-monthly',
-            builder: (context, state) {
-              return SusbcricptionStatusScreen(
-                subscriptionPlanType: SubscriptionPlanType.monthly,
-              );
-            }),
-
-        GoRoute(
-            path: '/subscription-success-yearly',
-            builder: (context, state) {
-              return const SusbcricptionStatusScreen(
-                subscriptionPlanType: SubscriptionPlanType.yearly,
-              );
-            }),
 
         GoRoute(
           path: '/articles',
@@ -333,15 +272,6 @@ class AppRouter {
           },
         ),
 
-        // Subscription Management Route
-        GoRoute(
-          path: '/subscription-management',
-          parentNavigatorKey: _rootNavigatorKey,
-          builder: (context, state) {
-            return const SubscriptionManagementScreen();
-          },
-        ),
-
         // Achievements Route
         GoRoute(
           path: '/achievements',
@@ -359,20 +289,15 @@ class AppRouter {
         final isQuizRoute = state.matchedLocation.startsWith('/onboard-quiz');
         final isInitialRoute = state.matchedLocation == '/';
         final isGetStartedRoute = state.matchedLocation == '/get-started';
-        final isPaywallRoute = state.matchedLocation.startsWith('/paywall');
         final isTermsRoute = state.matchedLocation.startsWith('/terms') ||
             state.matchedLocation.startsWith('/privacy-policy');
-        final isSubscriptionRoute =
-            state.matchedLocation.startsWith('/subscription');
 
         final isProtectedRoute = !isAuthRoute &&
             !isOnboardingRoute &&
             !isQuizRoute &&
             !isInitialRoute &&
             !isGetStartedRoute &&
-            !isPaywallRoute &&
-            !isTermsRoute &&
-            !isSubscriptionRoute;
+            !isTermsRoute;
 
         final isUserAuthenticated = AuthRepositoryImpl.isUserAuthenticated();
 
@@ -395,22 +320,6 @@ class AppRouter {
           print(
               'User is authenticated, redirecting to home from initial route');
           return '/home';
-        }
-
-        // Special case for Google test user
-        if (isGoogleTestUser && isPaywallRoute) {
-          return '/home';
-        }
-
-        // If authenticated but not subscribed and trying to access protected routes
-        if (isUserAuthenticated &&
-            !isSubscribed &&
-            isProtectedRoute &&
-            !isGoogleTestUser &&
-            !kIsWeb) {
-          print(
-              'User is authenticated but not subscribed, redirecting to paywall');
-          return '/paywall';
         }
 
         return null;

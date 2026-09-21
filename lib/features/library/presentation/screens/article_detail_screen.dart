@@ -120,15 +120,6 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                                   ),
                                 ),
                               ),
-                            if (widget.article.isPremium)
-                              Padding(
-                                padding: const EdgeInsets.only(left: 12),
-                                child: Icon(
-                                  Icons.star,
-                                  size: 16,
-                                  color: Colors.amber,
-                                ),
-                              ),
                           ],
                         ),
                         SizedBox(height: isSmallScreen ? 12 : 16),

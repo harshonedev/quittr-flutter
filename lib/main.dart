@@ -18,7 +18,6 @@ import 'package:quittr/features/reason/presentation/bloc/reason_bloc.dart';
 import 'package:quittr/features/relapse_tracker/presentation/bloc/relapse_tracker_bloc.dart';
 import 'package:quittr/firebase_options.dart';
 import 'package:quittr/core/presentation/theme/cubit/theme_cubit.dart';
-import 'package:quittr/features/paywall/presentation/bloc/paywall_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,7 +54,6 @@ class QuittrApp extends StatelessWidget {
         BlocProvider<AchievementsBloc>(
           create: (context) => di.sl<AchievementsBloc>(),
         ),
-        BlocProvider(create: (_) => di.sl<SubscriptionBloc>()),
         BlocProvider<HomeBloc>(
           create: (context) => di.sl<HomeBloc>(),
         ),

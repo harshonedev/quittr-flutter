@@ -10,7 +10,7 @@ Quittr is a modular, scalable Flutter app to help users quit addictions and trac
 ### 2.1. Directory Layout
 
 - **lib/core/**: App-wide utilities, dependency injection, routing, theming, error handling, reusable widgets, and services.
-- **lib/features/**: Each feature (auth, onboarding, paywall, home, etc.) is self-contained and follows clean architecture:
+- **lib/features/**: Each feature (auth, onboarding, home, etc.) is self-contained and follows clean architecture:
   - **data/**: Data sources, models, repository implementations
   - **domain/**: Entities, repository interfaces, use cases
   - **presentation/**: UI screens, widgets, blocs/cubits
@@ -24,7 +24,6 @@ Quittr is a modular, scalable Flutter app to help users quit addictions and trac
 - Routing: go_router
 - Dependency injection: get_it
 - Firebase (auth, firestore, storage)
-- In-app purchases: in_app_purchase
 - Local storage: get_storage, sqflite, shared_preferences
 - UI/UX: google_fonts, flutter_svg, lottie, rive
 - Notifications: flutter_local_notifications, timezone
@@ -47,19 +46,12 @@ Quittr is a modular, scalable Flutter app to help users quit addictions and trac
 - [x] Quiz result and recommendations
 - [ ] Polish quiz result UI and logic
 
-### 3.3. Paywall & Subscription
-- [x] In-app purchase integration
-- [x] Multiple subscription plans
-- [x] Restore purchases
-- [ ] Add terms of service and privacy policy screens
-- [ ] Fix UI overflow bugs
-
-### 3.4. Home & Progress
+### 3.3. Home & Progress
 - [x] Relapse tracker
 - [x] Progress visualization
 - [ ] Add more analytics and insights
 
-### 3.5. Recovery Tools
+### 3.4. Recovery Tools
 - [x] Breathing exercises
 - [x] Meditation
 - [x] Craving control
@@ -67,19 +59,19 @@ Quittr is a modular, scalable Flutter app to help users quit addictions and trac
 - [ ] Complete missing logic in detox, breathing, and craving control screens
 - [ ] Ensure all buttons and flows work
 
-### 3.6. Journal & Motivation
+### 3.5. Journal & Motivation
 - [x] Daily journal
 - [x] Motivational quotes/content
 - [ ] Add more content and polish UI
 
-### 3.7. Profile & Settings
+### 3.6. Profile & Settings
 - [x] Edit profile
 - [x] App settings
 - [x] Side effects tracking
 - [ ] Add more settings options
 - [ ] Complete side effects tracking
 
-### 3.8. Other
+### 3.7. Other
 - [x] Library (resources)
 - [x] Pledge system
 - [x] Reason list
@@ -133,7 +125,7 @@ Quittr is a modular, scalable Flutter app to help users quit addictions and trac
 ---
 
 ## 9. Known Issues
-- Quiz result and paywall screens may overflow on some devices
+- Quiz result screen may overflow on some devices
 - Detox screen podcast button not working
 - Library back button missing
 - "More" button feature incomplete

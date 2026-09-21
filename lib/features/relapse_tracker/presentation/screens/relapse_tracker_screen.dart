@@ -165,13 +165,6 @@ class _RelapseTrackerScreenState extends State<RelapseTrackerScreen> {
             appBar: AppBar(
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.workspace_premium_rounded),
-                  onPressed: () {
-                    // Navigate to subscription management screen
-                    context.push('/subscription-management');
-                  },
-                ),
-                IconButton(
                   icon: const Icon(Icons.emoji_events_outlined),
                   onPressed: () {
                     // Navigate to achievements screen

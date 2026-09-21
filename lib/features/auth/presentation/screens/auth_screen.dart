@@ -7,12 +7,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quittr/core/routing/app_router.dart';
-import 'package:quittr/features/paywall/presentation/bloc/paywall_bloc.dart';
 import '../bloc/auth_bloc.dart';
 import '../widgets/social_auth_button.dart';
 
 class AuthScreen extends StatelessWidget {
-  
   const AuthScreen({super.key});
 
   @override
@@ -31,22 +29,6 @@ class AuthScreen extends StatelessWidget {
               );
             }
           }),
-          BlocListener<SubscriptionBloc, IAPState>(
-            listener: (context, state) {
-              if (state is SubscribedState) {
-                // User has an active subscription
-                AppRouter.isSubscribed = true;
-                context.go('/home');
-              } else {
-                AppRouter.isSubscribed = false;
-                if (!AppRouter.isGoogleTestUser) {
-                  context.go('/paywall');
-                } else {
-                  context.go('/home');
-                }
-              }
-            },
-          ),
         ],
         child: _AuthScreenContent(
           onGoogleSignIn: () => _onGoogleSignInPressed(context),
@@ -58,14 +40,12 @@ class AuthScreen extends StatelessWidget {
   }
 
   void _onLoggedIn(BuildContext context, AuthLoggedIn authState) {
-    // If user is new, show quiz questions screen, else if user has
-    // a subscription, show home screen, else show paywall screen.
+    // If user is new, show quiz questions screen, else show home screen.
     AppRouter.isAuthenticated = true;
     if (authState.user.isNewUser) {
       _startQuiz(context);
     } else {
-      BlocProvider.of<SubscriptionBloc>(context)
-          .add(CheckSubscriptionEvent(userId: authState.user.id));
+      context.go('/home');
     }
   }
 

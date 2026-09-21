@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:http/http.dart' as http;
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:logger/logger.dart';
 import 'package:quittr/core/presentation/theme/cubit/theme_cubit.dart';
 import 'package:quittr/core/services/rating_service.dart';
@@ -27,15 +24,6 @@ import 'package:quittr/features/motivaton/data/data_sources/motivation_quotes_lo
 import 'package:quittr/features/motivaton/data/repository/motivational_quotes_repository_impl.dart';
 import 'package:quittr/features/motivaton/domain/repository/motivation_quotes_repository.dart';
 import 'package:quittr/features/motivaton/domain/usecases/get_motivationalQuotes.dart';
-import 'package:quittr/features/paywall/data/datasources/purchase_data_source.dart';
-import 'package:quittr/features/paywall/data/datasources/subscription_firestore.dart';
-import 'package:quittr/features/paywall/domain/usecases/check_subscription_status.dart';
-import 'package:quittr/features/paywall/domain/usecases/dispose_subscription.dart';
-import 'package:quittr/features/paywall/domain/usecases/purchase_by_coupon.dart';
-import 'package:quittr/features/paywall/domain/usecases/purchase_web_product.dart';
-import 'package:quittr/features/paywall/domain/usecases/restore_purchaces.dart';
-import 'package:quittr/features/paywall/domain/usecases/start_listening_updates.dart';
-import 'package:quittr/features/paywall/presentation/bloc/paywall_bloc.dart';
 import 'package:quittr/features/pledge/data/data%20sources/local_notification_datasource.dart';
 import 'package:quittr/features/pledge/data/repository/local_notification_repository_impl.dart';
 import 'package:quittr/features/pledge/domain/repository/local_notification_repository.dart';
@@ -71,12 +59,6 @@ import 'package:quittr/features/journal/domain/usecases/get_journal_entries.dart
 import 'package:quittr/features/journal/domain/usecases/add_journal_entry.dart';
 import '../features/journal/data/repositories/journal_repository_impl.dart';
 import '../features/journal/domain/repositories/journal_repository.dart';
-import '../features/paywall/domain/usecases/initialize_purchases.dart';
-import '../features/paywall/domain/usecases/get_subscriptions.dart';
-import '../features/paywall/domain/usecases/purchase_product.dart';
-import '../features/paywall/data/repositories/purchase_repository_impl.dart';
-import '../features/paywall/domain/repositories/purchase_repository.dart';
-import '../features/paywall/domain/usecases/get_purchase_updates.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:quittr/features/achievements/data/datasources/achievement_data_source.dart';
 import 'package:quittr/features/achievements/data/repositories/achievement_repository_impl.dart';
@@ -117,8 +99,6 @@ Future<void> init() async {
   sl.registerLazySingleton(() => FirebaseStorage.instance);
   sl.registerLazySingleton(() => ImagePicker());
   sl.registerLazySingleton(() => FlutterLocalNotificationsPlugin());
-  sl.registerLazySingleton(() => InAppPurchase.instance);
-  sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => Logger());
 
   // Services
@@ -192,19 +172,6 @@ Future<void> init() async {
 
   sl.registerFactory(() => GetQuotes(sl()));
 
-  // sl.registerLazySingleton(() => InitializePurchases(sl()));
-  // sl.registerLazySingleton(() => GetSubscriptions(sl()));
-  // sl.registerLazySingleton(() => PurchaseProduct(sl()));
-  // sl.registerLazySingleton(() => GetPurchaseUpdates(sl()));
-
-  // // Repositories
-  // sl.registerLazySingleton<PurchaseRepository>(
-  //   () => PurchaseRepositoryImpl(dataSource: sl()),
-  // );
-  // sl.registerLazySingleton<PurchaseDataSource>(
-  //   () => PurchaseDataSourceImpl(),
-  // );
-
   //Feature :- Motivation
 
   sl.registerFactory<MotivationQuotesLocalDatasource>(
@@ -240,45 +207,6 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ScheduleNotification(sl()));
 
   sl.registerLazySingleton(() => NotificationBloc(sl(), sl()));
-
-  // Features :- Subscription
-
-  sl.registerLazySingleton<SubscriptionDataSource>(
-    () => SubscriptionDataSourceImpl(
-      logger: sl(),
-    ),
-  );
-
-  sl.registerLazySingleton<SubscriptionRepository>(() =>
-      SubscriptionRepositoryImpl(
-          dataSource: sl(), subscriptionFirestore: sl()));
-
-  sl.registerLazySingleton(() => SubscriptionFirestore(firestore: sl()));
-  sl.registerLazySingleton(() => PurchaseProductUseCase(sl()));
-  sl.registerLazySingleton(() => CheckSubscriptionAvailabilityUseCase(sl()));
-  sl.registerLazySingleton(() => DisposeSubscriptionUseCase(sl()));
-  sl.registerLazySingleton(() => FetchProductsUseCase(sl()));
-  sl.registerLazySingleton(() => ListenToPurchaseUpdatesUseCase(sl()));
-  sl.registerLazySingleton(() => RestorePurchasesUseCase(sl()));
-  sl.registerLazySingleton(
-      () => CheckSubscriptionStatusUseCase(repository: sl()));
-
-  sl.registerLazySingleton(() => StartListeningUpdatesUseCase(sl()));
-  sl.registerLazySingleton(() => PurchaseWebProduct(sl()));
-  sl.registerLazySingleton(() => PurchaseByCoupon(sl()));
-
-  sl.registerLazySingleton(() => SubscriptionBloc(
-        purchaseProductUseCase: sl(),
-        checkAvailabilityUseCase: sl(),
-        disposeSubscriptionUseCase: sl(),
-        fetchProductsUseCase: sl(),
-        listenToPurchaseUpdatesUseCase: sl(),
-        restorePurchasesUseCase: sl(),
-        checkSubscriptionStatusUseCase: sl(),
-        startListeningUpdatesUseCase: sl(),
-        purchaseWebProductUseCase: sl(),
-        purchaseByCouponUseCase: sl(),
-      ));
 
   // podcast
 

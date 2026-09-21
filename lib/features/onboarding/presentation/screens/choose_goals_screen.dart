@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quittr/core/routing/app_router.dart';
-import 'package:quittr/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:quittr/features/paywall/presentation/bloc/paywall_bloc.dart';
 
 class ChooseGoalsScreen extends StatefulWidget {
   final Map userInfo;
@@ -80,153 +76,124 @@ class _ChooseGoalsScreenState extends State<ChooseGoalsScreen> {
       'goals': _selectedGoals.toList(),
     };
     debugPrint('completeUserInfo: $completeUserInfo');
-    final authState = BlocProvider.of<AuthBloc>(context, listen: false).state;
-    if (context.read<SubscriptionBloc>().state is SubscribedState) {
-      AppRouter.isSubscribed = true;
-      context.go('/home');
-      return;
-    }
-    if (authState is AuthAuthenticated || authState is AuthLoggedIn) {
-      final userId = authState is AuthAuthenticated
-          ? authState.user.id
-          : (authState as AuthLoggedIn).user.id;
-
-      BlocProvider.of<SubscriptionBloc>(context)
-          .add(CheckSubscriptionEvent(userId: userId));
-    }
-
-    //context.go('/home');
+    context.go('/home');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocListener<SubscriptionBloc, IAPState>(
-          listener: (context, state) {
-            if (state is SubscribedState) {
-              // User has an active subscription
-              AppRouter.isSubscribed = true;
-              context.go('/home');
-            } else {
-              AppRouter.isSubscribed = false;
-              context.go('/paywall');
-            }
-          },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Choose Your Goals',
-                      style:
-                          Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                fontFamily: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w600,
-                                ).fontFamily,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Select the goals that matter most to you. This will help us personalize your journey.',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
-                    ),
-                  ],
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Choose Your Goals',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          fontFamily: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600,
+                          ).fontFamily,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Select the goals that matter most to you. This will help us personalize your journey.',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  itemCount: _goals.length,
-                  itemBuilder: (context, index) {
-                    final goal = _goals[index];
-                    final isSelected = _selectedGoals.contains(goal['title']);
+            ),
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                itemCount: _goals.length,
+                itemBuilder: (context, index) {
+                  final goal = _goals[index];
+                  final isSelected = _selectedGoals.contains(goal['title']);
 
-                    return Card(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      child: InkWell(
-                        onTap: () => _toggleGoal(goal['title']!),
-                        borderRadius: BorderRadius.circular(12),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 48,
-                                height: 48,
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primaryContainer,
-                                  borderRadius: BorderRadius.circular(12),
+                  return Card(
+                    margin: const EdgeInsets.only(bottom: 12),
+                    child: InkWell(
+                      onTap: () => _toggleGoal(goal['title']!),
+                      borderRadius: BorderRadius.circular(12),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 48,
+                              height: 48,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primaryContainer,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  goal['icon']!,
+                                  style: const TextStyle(fontSize: 24),
                                 ),
-                                child: Center(
-                                  child: Text(
-                                    goal['icon']!,
-                                    style: const TextStyle(fontSize: 24),
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    goal['title']!,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                   ),
-                                ),
+                                  Text(
+                                    goal['description']!,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurfaceVariant,
+                                        ),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      goal['title']!,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                    Text(
-                                      goal['description']!,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onSurfaceVariant,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Checkbox(
-                                value: isSelected,
-                                onChanged: (_) => _toggleGoal(goal['title']!),
-                              ),
-                            ],
-                          ),
+                            ),
+                            Checkbox(
+                              value: isSelected,
+                              onChanged: (_) => _toggleGoal(goal['title']!),
+                            ),
+                          ],
                         ),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: FilledButton(
-                  onPressed: _selectedGoals.isNotEmpty ? _onContinue : null,
-                  style: FilledButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: const Text('Continue'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: FilledButton(
+                onPressed: _selectedGoals.isNotEmpty ? _onContinue : null,
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
+                child: const Text('Continue'),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

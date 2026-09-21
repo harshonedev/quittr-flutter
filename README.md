@@ -12,7 +12,6 @@ Quittr is a Flutter-based mobile application designed to help users quit addicti
 - **Routing:** go_router
 - **Dependency Injection:** get_it
 - **Firebase:** firebase_core, firebase_auth, cloud_firestore, firebase_storage
-- **In-App Purchases:** in_app_purchase
 - **Local Storage:** get_storage, sqflite, shared_preferences
 - **UI & Animations:** google_fonts, flutter_svg, lottie, rive
 - **Notifications:** flutter_local_notifications, timezone
@@ -25,10 +24,9 @@ Quittr is a Flutter-based mobile application designed to help users quit addicti
 ```
 lib/
   core/           # App-wide utilities, DI, routing, theme, error handling
-  features/       # Modular features (auth, onboarding, paywall, etc.)
+  features/       # Modular features (auth, onboarding, home, etc.)
     auth/
     onboarding/
-    paywall/
     home/
     ...           # (breathing_exercise, craving_control, detox, etc.)
   main.dart       # App entry point
@@ -49,31 +47,26 @@ lib/
 - Collect user info (name, age)
 - Quiz result and recommendations
 
-### 3. **Paywall & Subscription**
-- In-app purchase integration
-- Multiple subscription plans
-- Restore purchases
-
-### 4. **Home & Progress**
+### 3. **Home & Progress**
 - Relapse tracker
 - Progress visualization
 
-### 5. **Recovery Tools**
+### 4. **Recovery Tools**
 - Breathing exercises
 - Meditation
 - Craving control
 - Detox support
 
-### 6. **Journal & Motivation**
+### 5. **Journal & Motivation**
 - Daily journal
 - Motivational quotes/content
 
-### 7. **Profile & Settings**
+### 6. **Profile & Settings**
 - Edit profile
 - App settings
 - Side effects tracking
 
-### 8. **Other**
+### 7. **Other**
 - Library (resources)
 - Pledge system
 - Reason list
@@ -85,7 +78,6 @@ lib/
 - Modular feature structure with clean architecture
 - Authentication (Google, Apple, Email/Password)
 - Onboarding flow with quiz and user info collection
-- Paywall screen with in-app purchase integration
 - Home screen with relapse tracker
 - Breathing, meditation, craving control, and detox screens scaffolded
 - Journal, motivation, and reason list screens scaffolded
@@ -101,7 +93,7 @@ lib/
 
 ## 🚧 Incomplete / To-Do
 
-- Fix UI overflows on quiz result and paywall screens
+- Fix UI overflows on quiz result screen
 - Detox screen: "Listen Podcast" button not working
 - Library: Back button not showing
 - "More" button (feature unspecified)
@@ -121,28 +113,23 @@ lib/
    - Fix overflow bugs
    - Improve quiz result logic and UI
 
-2. **Finalize Paywall & Subscription**
-   - Fix overflow bugs
-   - Add terms of service
-   - Test restore purchases on all platforms
-
-3. **Complete Recovery Tools**
+2. **Complete Recovery Tools**
    - Implement missing logic in detox, breathing, and craving control screens
    - Ensure all buttons and flows work
 
-4. **Enhance Journal, Motivation, and Library**
+3. **Enhance Journal, Motivation, and Library**
    - Add content and polish UI
    - Fix navigation issues (e.g., back button)
 
-5. **Profile & Settings**
+4. **Profile & Settings**
    - Add more settings options
    - Complete side effects tracking
 
-6. **Testing & QA**
+5. **Testing & QA**
    - Add and run unit, widget, and integration tests
    - Fix bugs and optimize performance
 
-7. **Release Preparation**
+6. **Release Preparation**
    - Add privacy policy, terms of service
    - Finalize assets and app store requirements
 
@@ -152,7 +139,7 @@ lib/
 
 1. Clone the repo
 2. Run `flutter pub get`
-3. Set up Firebase: run `flutterfire configure` (generates `lib/firebase_options.dart`, `android/app/google-services.json`, `ios/Runner/GoogleService-Info.plist`). See `lib/firebase_options.example.dart` for the expected shape. These files are gitignored.
+3. Set up Firebase: run `flutterfire configure` (generates `lib/firebase_options.dart`, `android/app/google-services.json`, `ios/Runner/GoogleService-Info.plist`). These files are gitignored.
 4. Run `flutter run`
 
 ---

@@ -28,22 +28,6 @@ class SettingsScreen extends StatelessWidget {
               children: [
                 _buildSection(
                   context,
-                  'Subscription',
-                  [
-                    ListTile(
-                      leading: const Icon(Icons.card_membership),
-                      title: const Text('Manage Subscription'),
-                      subtitle: const Text(
-                          'View and manage your subscription details'),
-                      trailing: const Icon(Icons.chevron_right),
-                      onTap: () {
-                        context.push('/subscription-management');
-                      },
-                    ),
-                  ],
-                ),
-                _buildSection(
-                  context,
                   'App Settings',
                   [
                     SwitchListTile(

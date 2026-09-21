@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		074B78932D5D9C25002C20A3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 074B78922D5D9C25002C20A3 /* StoreKit.framework */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
 		38BAE96C35A1D674233DBA65 /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB796F7D87805A464079A5D /* Pods_RunnerTests.framework */; };
@@ -45,7 +44,6 @@
 
 /* Begin PBXFileReference section */
 		072282BA2D6856050000247E /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
-		074B78922D5D9C25002C20A3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0D074AE1834D9AE65789AEFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0FBE1D889B9D8E8851A31264 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
@@ -86,7 +84,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA3089C002488F4B20D6AFD9 /* Pods_Runner.framework in Frameworks */,
-				074B78932D5D9C25002C20A3 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +114,6 @@
 		8D3D3D58DF3775FEE361C22F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				074B78922D5D9C25002C20A3 /* StoreKit.framework */,
 				0FBE1D889B9D8E8851A31264 /* Pods_Runner.framework */,
 				FAB796F7D87805A464079A5D /* Pods_RunnerTests.framework */,
 			);

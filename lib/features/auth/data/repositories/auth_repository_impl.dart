@@ -5,9 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quittr/core/error/failures.dart';
-import 'package:quittr/core/routing/app_router.dart';
 import 'package:quittr/core/services/logger_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/repositories/auth_repository.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -134,13 +132,6 @@ class AuthRepositoryImpl implements AuthRepository {
       );
       final firebaseUser = userCredential.user!;
 
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-
-      if (firebaseUser.email == "google@writecream.com") {
-        AppRouter.isGoogleTestUser = true;
-        prefs.setBool("isGoogleTestUser", true);
-      }
-
       _logger.i('User account created successfully: ${firebaseUser.uid}');
       return Right(User(
         id: firebaseUser.uid,
@@ -161,13 +152,6 @@ class AuthRepositoryImpl implements AuthRepository {
             password: password,
           );
           final firebaseUser = userCredentials.user!;
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-
-          if (firebaseUser.email == "google@writecream.com") {
-            AppRouter.isGoogleTestUser = true;
-            prefs.setBool("isGoogleTestUser", true);
-          }
-
           _logger.i('User signed in successfully: ${firebaseUser.uid}');
           return Right(
             User(
