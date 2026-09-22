@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quittr/core/widgets/responsive_scroll_body.dart';
 
 class OnboardingScreen extends StatefulWidget {
   final Map userInfo;
@@ -70,117 +71,123 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       backgroundColor: _onboardingData[_currentPage]['backgroundColor'],
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                onPageChanged: (page) => setState(() => _currentPage = page),
-                itemCount: _onboardingData.length,
-                itemBuilder: (context, index) {
-                  final data = _onboardingData[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Spacer(),
-                        Image.asset(
-                          'assets/images/onboarding/onboarding_${index + 1}.png',
-                          width: MediaQuery.sizeOf(context).width * 0.65,
-                        ),
-                        SizedBox(
-                          height: MediaQuery.sizeOf(context).height * 0.025,
-                        ),
-                        Text(
-                          data['title']!,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
-                              ?.copyWith(
-                                fontFamily: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w600,
-                                ).fontFamily,
-                                fontWeight: FontWeight.w900,
-                                color: Colors.white,
-                              ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          data['description']!,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+        child: ResponsiveCenter(
+          child: Column(
+            children: [
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  onPageChanged: (page) => setState(() => _currentPage = page),
+                  itemCount: _onboardingData.length,
+                  itemBuilder: (context, index) {
+                    final data = _onboardingData[index];
+                    return Center(
+                      child: SingleChildScrollView(
+                        padding: const EdgeInsets.all(24.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              'assets/images/onboarding/onboarding_${index + 1}.png',
+                              width: responsiveContentWidth(context) * 0.65,
+                            ),
+                            SizedBox(
+                              height:
+                                  (MediaQuery.sizeOf(context).height * 0.025)
+                                      .clamp(12.0, 24.0),
+                            ),
+                            Text(
+                              data['title']!,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium
+                                  ?.copyWith(
+                                    fontFamily: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w600,
+                                    ).fontFamily,
+                                    fontWeight: FontWeight.w900,
                                     color: Colors.white,
                                   ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      _onboardingData.length,
-                      (index) => Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 4),
-                        width: 8,
-                        height: 8,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: _currentPage == index
-                              ? Colors.white
-                              : Colors.grey.shade800,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  FilledButton(
-                    onPressed: _onNextPressed,
-                    style: FilledButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 48,
-                        vertical: 16,
-                      ),
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.black,
-                      textStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          _currentPage == _onboardingData.length - 1
-                              ? 'Get Started'
-                              : 'Next',
-                        ),
-                        if (_currentPage != _onboardingData.length - 1)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8),
-                            child: const Icon(
-                              Icons.arrow_forward,
-                              color: Colors.black,
+                              textAlign: TextAlign.center,
                             ),
-                          )
-                      ],
-                    ),
-                  ),
-                ],
+                            const SizedBox(height: 16),
+                            Text(
+                              data['description']!,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                    color: Colors.white,
+                                  ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        _onboardingData.length,
+                        (index) => Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                          width: 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: _currentPage == index
+                                ? Colors.white
+                                : Colors.grey.shade800,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    FilledButton(
+                      onPressed: _onNextPressed,
+                      style: FilledButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 48,
+                          vertical: 16,
+                        ),
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.black,
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            _currentPage == _onboardingData.length - 1
+                                ? 'Get Started'
+                                : 'Next',
+                          ),
+                          if (_currentPage != _onboardingData.length - 1)
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: const Icon(
+                                Icons.arrow_forward,
+                                color: Colors.black,
+                              ),
+                            )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

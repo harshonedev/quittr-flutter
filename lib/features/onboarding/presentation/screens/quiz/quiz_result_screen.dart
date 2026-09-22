@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quittr/core/widgets/responsive_scroll_body.dart';
 
 class QuizResultScreen extends StatefulWidget {
   final Map userInfo;
@@ -46,137 +47,131 @@ class _QuizResultScreenState extends State<QuizResultScreen>
 
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: screenHeight -
-                  MediaQuery.of(context).padding.top -
-                  MediaQuery.of(context).padding.bottom,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Column(
-                    children: [
-                      Stack(
-                        children: [
-                          Positioned(
-                            left: 0,
-                            child: Icon(
-                              Icons.check_circle,
-                              color: Colors.green,
-                              size: 30,
-                            ),
+        child: ResponsiveScrollBody(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Column(
+                  children: [
+                    Stack(
+                      children: [
+                        Positioned(
+                          left: 0,
+                          child: Icon(
+                            Icons.check_circle,
+                            color: Colors.green,
+                            size: 30,
                           ),
-                          Center(
-                            child: Text(
-                              'Analysis Complete',
-                              style: GoogleFonts.poppins(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        "We've got some news to break to you...",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
                         ),
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'Your responses indicate a clear\ndependance on internet porn*',
-                        style: GoogleFonts.poppins(
-                          fontSize: 18,
-                          height: 1.4,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 32),
-                      SizedBox(
-                        height: screenHeight * 0.3,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _buildScoreBar(
-                              label: 'Your Score',
-                              score: _scoreAnimation,
-                              color: Color(0xFFE57373),
-                            ),
-                            const SizedBox(width: 24),
-                            _buildScoreBar(
-                              label: 'Average',
-                              score: const AlwaysStoppedAnimation(13),
-                              color: Color(0xFF81C784),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '39%',
+                        Center(
+                          child: Text(
+                            'Analysis Complete',
                             style: GoogleFonts.poppins(
-                              fontSize: 18,
-                              color: Color(0xFFE57373),
+                              fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            ' higher dependence on porn',
-                            style: GoogleFonts.poppins(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      "We've got some news to break to you...",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      'Your responses indicate a clear\ndependance on internet porn*',
+                      style: GoogleFonts.poppins(
+                        fontSize: 18,
+                        height: 1.4,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 32),
+                    SizedBox(
+                      height: (screenHeight * 0.3).clamp(160.0, 260.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _buildScoreBar(
+                            label: 'Your Score',
+                            score: _scoreAnimation,
+                            color: Color(0xFFE57373),
                           ),
-                          Icon(Icons.arrow_upward, color: Color(0xFFE57373)),
+                          const SizedBox(width: 24),
+                          _buildScoreBar(
+                            label: 'Average',
+                            score: const AlwaysStoppedAnimation(13),
+                            color: Color(0xFF81C784),
+                          ),
                         ],
                       ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 24.0),
-                        child: Text(
-                          '* This result is an indication only, not a medical diagnosis. For a definitive assessment, please contact your healthcare provider.',
+                    ),
+                    const SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '39%',
                           style: GoogleFonts.poppins(
-                            fontSize: 12,
+                            fontSize: 18,
+                            color: Color(0xFFE57373),
+                            fontWeight: FontWeight.bold,
                           ),
-                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          ' higher dependence on porn',
+                          style: GoogleFonts.poppins(fontSize: 16),
+                        ),
+                        Icon(Icons.arrow_upward, color: Color(0xFFE57373)),
+                      ],
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 24.0),
+                      child: Text(
+                        '* This result is an indication only, not a medical diagnosis. For a definitive assessment, please contact your healthcare provider.',
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    FilledButton(
+                      onPressed: () {
+                        context.go(
+                          '/onboard-quiz/check-symptoms',
+                          extra: widget.userInfo,
+                        );
+                      },
+                      style: FilledButton.styleFrom(
+                        minimumSize: Size(double.infinity, 48),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      FilledButton(
-                        onPressed: () {
-                          context.go(
-                            '/onboard-quiz/check-symptoms',
-                            extra: widget.userInfo,
-                          );
-                        },
-                        style: FilledButton.styleFrom(
-                          minimumSize: Size(double.infinity, 48),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        child: Text(
-                          'Check your symptoms',
-                          style: GoogleFonts.poppins(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
+                      child: Text(
+                        'Check your symptoms',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

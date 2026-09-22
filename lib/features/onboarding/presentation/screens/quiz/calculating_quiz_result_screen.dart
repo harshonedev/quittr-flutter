@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 
+import 'package:quittr/core/widgets/responsive_scroll_body.dart';
+
 class CalculatingQuizResultScreen extends StatefulWidget {
   final Map userInfo;
 
@@ -85,46 +87,49 @@ class _CalculatingQuizResultScreenState
           ),
         ),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Spacer(),
-                _buildAnimatedBrain(context),
-                const SizedBox(height: 40),
-                Text(
-                  'Analyzing Your Responses',
-                  style: GoogleFonts.poppins(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16),
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  child: Text(
-                    _loadingTexts[_currentTextIndex],
-                    key: ValueKey(_currentTextIndex),
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
+          child: ResponsiveScrollBody(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  _buildAnimatedBrain(context),
+                  const SizedBox(height: 40),
+                  Text(
+                    'Analyzing Your Responses',
+                    style: GoogleFonts.poppins(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                     textAlign: TextAlign.center,
                   ),
-                ),
-                const SizedBox(height: 48),
-                _buildProgressIndicator(),
-                // const Spacer(),
-                Opacity(
-                  opacity: 0.9,
-                  child: SvgPicture.asset(
-                    'assets/illustrations/calculating_result.svg',
-                    width: MediaQuery.sizeOf(context).width,
+                  const SizedBox(height: 16),
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    child: Text(
+                      _loadingTexts[_currentTextIndex],
+                      key: ValueKey(_currentTextIndex),
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 48),
+                  _buildProgressIndicator(),
+                  // const Spacer(),
+                  Opacity(
+                    opacity: 0.9,
+                    child: SvgPicture.asset(
+                      'assets/illustrations/calculating_result.svg',
+                      width: responsiveContentWidth(context),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -134,8 +139,8 @@ class _CalculatingQuizResultScreenState
 
   Widget _buildAnimatedBrain(BuildContext context) {
     return Container(
-      width: MediaQuery.sizeOf(context).width * 0.28,
-      height: MediaQuery.sizeOf(context).width * 0.28,
+      width: responsiveContentWidth(context) * 0.28,
+      height: responsiveContentWidth(context) * 0.28,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: Theme.of(context).colorScheme.primaryContainer,
@@ -154,7 +159,7 @@ class _CalculatingQuizResultScreenState
           ),
           child: Icon(
             Icons.psychology_outlined,
-            size: MediaQuery.sizeOf(context).width * 0.14,
+            size: responsiveContentWidth(context) * 0.14,
             color: Theme.of(context).colorScheme.primary,
           ),
         ),

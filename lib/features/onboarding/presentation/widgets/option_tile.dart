@@ -76,7 +76,7 @@ class _OptionTileState extends State<OptionTile> {
                 ),
               ),
               const SizedBox(width: 10),
-              Text(widget.option),
+              Expanded(child: Text(widget.option)),
             ],
           ),
         ),
